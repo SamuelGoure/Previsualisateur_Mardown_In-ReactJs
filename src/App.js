@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./App.css";
+import { marked } from "marked";
 
-const App = () => {
+function App() {
   // State
 
   const [texte, setTexte] = useState("mon textaera par defaut");
@@ -10,7 +11,12 @@ const App = () => {
 
   const changeTexHandler = (event) => {
     setTexte(event.target.value);
+    console.log(marked(texte));
   };
+
+  // const markdownToHTML = () => {
+  //   return { __html: Marked(texte) };
+  // };
 
   return (
     <div className="App">
@@ -20,14 +26,12 @@ const App = () => {
             rows="30"
             value={texte}
             onChange={(e) => changeTexHandler(e)}
-          >
-            Ajoute moi
-          </textarea>
+          ></textarea>
         </div>
-        <div className="element"> {texte} </div>
+        <div className="element"> {marked(texte)} </div>
       </div>
     </div>
   );
-};
+}
 
 export default App;
